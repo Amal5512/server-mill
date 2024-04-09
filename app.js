@@ -6,6 +6,7 @@ const cartRouter=require("./controller/cartRouter")
 const productRouter=require("./controller/productRouter")
 const adminRouter=require("./controller/adminRouter")
 const orderRouter=require("./controller/orderRouter")
+const slotRouter=require("./controller/slotRouter")
 
 const app=express()
 
@@ -24,6 +25,7 @@ app.use("/cart",cartRouter)
 app.use("/product", productRouter);
 app.use("/admin", adminRouter);
 app.use("/order", orderRouter);
+app.use("/slot",slotRouter)
 
 
 

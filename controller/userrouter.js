@@ -1,6 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const userModel = require("../models/userModel");
+const usermodel = require("../models/userModel");
 
 const router = express.Router();
 
@@ -21,12 +22,10 @@ router.post("/signup", async (req, res) => {
   } catch (error) {
     console.log("error");
     console.error(error);
-    res
-      .status(500)
-      .json({
-        status: "error",
-        message: "An error occurred during the signup process.",
-      });
+    res.status(500).json({
+      status: "error",
+      message: "An error occurred during the signup process.",
+    });
   }
 });
 
@@ -52,8 +51,6 @@ router.post("/signin", async (req, res) => {
       status: "success",
       userData: data,
     });
-    
-
   } catch (error) {
     console.error(error);
     console.log("error occured");
@@ -64,5 +61,22 @@ router.post("/signin", async (req, res) => {
   }
 });
 
+//search for user by id
+router.post("/search", async (req, res) => {
+  try {
+    let id = req.body.id;
+    let data = await usermodel.findById(id);
+    res.json({
+      status: "success",
+      data: data,
+    });
+  } catch (error) {
+    console.error(error);
+    res.json({
+      status: "error",
+      message: "somthing went wrong in search user by id",
+    });
+  }
+});
 
-module.exports=router
+module.exports = router;
