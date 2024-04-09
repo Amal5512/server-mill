@@ -22,4 +22,25 @@ router.post("/book", async (req, res) => {
   }
 });
 
+//view all soltes
+router.post("/viewall", async (req, res) => {
+  try {
+    let input = req.body;
+    let data = await slotModel.find({ date: input.date }).populate("userId","-password").exec();
+    if (data) {
+      res.json({
+        status: "success",
+        data: data,
+      });
+    } else {
+      res.json({ status: "error", message: "no data found" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.json({
+      status: "error",
+      message: "somthing went wrong in view all slotes",
+    });
+  }
+});
 module.exports = router;
