@@ -65,8 +65,9 @@ router.post("/signin", async (req, res) => {
 router.post("/search", async (req, res) => {
   try {
     let id = req.body.id;
+    console.log(id)
     let data = await usermodel.findById(id);
-    res.json({
+    res.status(200).json({
       status: "success",
       data: data,
     });

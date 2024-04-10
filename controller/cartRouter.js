@@ -43,15 +43,17 @@ router.post("/add", async (req, res) => {
 });
 
 //view all cart items by userid
-router.get("/view", async (req, res) => {
+router.post("/view", async (req, res) => {
   try {
     let userId = req.body.userId;
+    console.log("0000")
+    console.log(userId)
     // Find cart items for the specific user ID
     const data = await cartModel
       .find({ userId })
       .populate("userId productId")
       .exec();
-    res.json({
+    res.status(200).json({
       status: "success",
       cartItems: data,
     });
